@@ -16,7 +16,7 @@ scalacOptions in Test += "-Yrangepos"
 libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.10.1",
   "org.scalatest" %% "scalatest" % "2.0" % "optional",
-  "org.specs2" %% "specs2" % "2.2.3" % "test"
+  "org.specs2" %% "specs2" % "2.2.3" % "optional"
 )
 
 publishTo <<= (version).apply { v =>
