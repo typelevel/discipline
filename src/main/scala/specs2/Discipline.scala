@@ -13,16 +13,13 @@ trait Discipline extends ScalaCheckMatchers { self: SpecificationLike =>
   def checkAll(name: String, ruleSet: Laws#RuleSet)(implicit p: Parameters) = {
     val fragments =
       for ((id, prop) ← ruleSet.all.properties)
-      yield s2""" ${id ! check(prop)(p) } """
+      yield s2""" ${id ! check(prop)(p) }""" ^ br
 
     val all =
       fragments.foldLeft(Fragments.createList())(_ append _)
 
-    s2"""
- ${ruleSet.name} laws must hold for ${name}
-
- $all
-    """
+    s"""\n\n${ruleSet.name} laws must hold for ${name}\n\n""" ^
+    all
   }
 
 }
