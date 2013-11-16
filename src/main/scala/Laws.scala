@@ -113,7 +113,7 @@ trait Laws {
   }
 
   /**
-   * Convencience class for rule sets without parents and bases.
+   * Convenience class for rule sets without parents and bases.
    */
   class SimpleRuleSet(
     name: String,
