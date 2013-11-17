@@ -1,8 +1,16 @@
+import sbtrelease._
+import sbtrelease.ReleasePlugin._
+import sbtrelease.ReleasePlugin.ReleaseKeys._
+import sbtrelease.ReleaseStateTransformations._
+import sbtrelease.Utilities._
+
+import com.typesafe.sbt.pgp.PgpKeys._
+
+// Build configuration
+
 organization := "org.typelevel"
 
 name := "discipline"
-
-version := "0.1-SNAPSHOT"
 
 scalaVersion := "2.10.3"
 
@@ -18,6 +26,38 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.0" % "optional",
   "org.specs2" %% "specs2" % "2.3.2" % "optional"
 )
+
+// Release plugin
+
+lazy val publishSignedArtifacts = ReleaseStep(
+  action = st => {
+    val extracted = st.extract
+    val ref = extracted.get(thisProjectRef)
+    extracted.runAggregated(publishSigned in Global in ref, st)
+  },
+  check = st => {
+    // getPublishTo fails if no publish repository is set up.
+    val ex = st.extract
+    val ref = ex.get(thisProjectRef)
+    Classpaths.getPublishTo(ex.get(publishTo in Global in ref))
+    st
+  },
+  enableCrossBuild = true
+)
+
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  publishSignedArtifacts,
+  setNextVersion,
+  commitNextVersion
+)
+
+// Publishing
 
 publishTo <<= (version).apply { v =>
   val nexus = "https://oss.sonatype.org/"
