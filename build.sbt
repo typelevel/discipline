@@ -45,6 +45,8 @@ lazy val publishSignedArtifacts = ReleaseStep(
   enableCrossBuild = true
 )
 
+releaseSettings
+
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
