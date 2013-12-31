@@ -8,7 +8,7 @@ import org.specs2.specification.Fragments
 import org.specs2.matcher.Parameters
 import org.specs2.matcher.ScalaCheckMatchers
 
-trait Discipline extends ScalaCheckMatchers { self: SpecificationLike =>
+trait Discipline extends ScalaCheckMatchers with SpecificationLike {
 
   def checkAll(name: String, ruleSet: Laws#RuleSet)(implicit p: Parameters) = {
     val fragments =
