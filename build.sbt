@@ -14,18 +14,23 @@ name := "discipline"
 
 scalaVersion := "2.10.3"
 
+crossScalaVersions := Seq("2.10.3", "2.11.0-RC1")
+
 scalacOptions ++= Seq(
+  "-deprecation",
   "-feature",
   "-language:implicitConversions"
 )
 
-scalacOptions in Test += "-Yrangepos"
-
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.10.1",
-  "org.scalatest" %% "scalatest" % "2.0" % "optional",
-  "org.specs2" %% "specs2" % "2.3.2" % "optional"
+  "org.scalacheck" %% "scalacheck" % "1.11.3",
+  "org.scalatest" %% "scalatest" % "2.1.0" % "optional",
+  "org.specs2" %% "specs2" % "2.3.10" % "optional"
 )
+
+conflictWarning ~= { cw =>
+  cw.copy(level = Level.Error, failOnConflict = true)
+}
 
 // Release plugin
 
@@ -101,5 +106,3 @@ pomExtra := (
     </developer>
   </developers>
 )
-
-// vim: expandtab:ts=2:sw=2

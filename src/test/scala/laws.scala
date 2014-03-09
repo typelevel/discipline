@@ -3,9 +3,7 @@ package org.typelevel.discipline
 import org.scalacheck.Prop
 
 object Dummy {
-  def prop = new Prop {
-    def apply(prms: Prop.Params) = Prop.Result(Prop.True)
-  }
+  def prop = Prop(_ => Prop.Result(status = Prop.True))
 }
 
 // adapted from spire
