@@ -14,7 +14,7 @@ name := "discipline"
 
 scalaVersion := "2.10.3"
 
-crossScalaVersions := Seq("2.10.3", "2.11.0-RC1")
+crossScalaVersions := Seq("2.10.3", "2.11.0")
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -24,8 +24,8 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.11.3",
-  "org.scalatest" %% "scalatest" % "2.1.0" % "optional",
-  "org.specs2" %% "specs2" % "2.3.10" % "optional"
+  "org.scalatest" %% "scalatest" % "2.1.3" % "optional",
+  "org.specs2" %% "specs2" % "2.3.11" % "optional"
 )
 
 conflictWarning ~= { cw =>
