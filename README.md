@@ -15,7 +15,7 @@ To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies +=
-  "org.typelevel" %% "discipline" % "0.2"
+  "org.typelevel" %% "discipline" % "0.2.1"
 ```
 
 
