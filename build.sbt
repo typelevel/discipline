@@ -23,9 +23,10 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.11.3",
-  "org.scalatest" %% "scalatest" % "2.1.3" % "optional",
-  "org.specs2" %% "specs2" % "2.3.11" % "optional"
+  "org.scalacheck" %% "scalacheck"        % "1.11.3",
+  "org.scalatest"  %% "scalatest"         % "2.2.1" % "optional",
+  "org.specs2"     %% "specs2-core"       % "2.4.4" % "optional",
+  "org.specs2"     %% "specs2-scalacheck" % "2.4.4" % "optional"
 )
 
 conflictWarning ~= { cw =>
