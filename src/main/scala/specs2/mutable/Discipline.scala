@@ -3,18 +3,21 @@ package specs2.mutable
 
 import org.scalacheck.Properties
 
-import org.specs2.specification.Fragments
-import org.specs2.matcher.Parameters
-import org.specs2.matcher.ScalaCheckMatchers
 import org.specs2.mutable.SpecificationLike
+import org.specs2.ScalaCheck
+import org.specs2.scalacheck.Parameters
+import org.specs2.specification.core.Fragments
 
-trait Discipline extends ScalaCheckMatchers { self: SpecificationLike =>
+trait Discipline extends ScalaCheck { self: SpecificationLike =>
 
-  def checkAll(name: String, ruleSet: Laws#RuleSet)(implicit p: Parameters) =
-    addFragments(name + " " + ruleSet.name,
-      for ((id, prop) ← ruleSet.all.properties) yield { id in check(prop)(p) }
-      , "must satisfy"
-    )
+  def checkAll(name: String, ruleSet: Laws#RuleSet)(implicit p: Parameters) = {
+    val fragments =
+      Fragments.foreach(ruleSet.all.properties) { case (id, prop) =>
+         s2""" ${id ! check(prop, p, defaultFreqMapPretty) }""" ^ br
+      }
+
+    addFragments(s"""\n\n${ruleSet.name} laws must hold for ${name}\n\n""" ^ fragments)
+  }
 
 }
 

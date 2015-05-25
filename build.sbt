@@ -12,9 +12,9 @@ organization := "org.typelevel"
 
 name := "discipline"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.10.5"
 
-crossScalaVersions := Seq("2.10.3", "2.11.0")
+crossScalaVersions := Seq("2.10.5", "2.11.6")
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -23,15 +23,15 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck"        % "1.11.3",
-  "org.scalatest"  %% "scalatest"         % "2.2.1" % "optional",
-  "org.specs2"     %% "specs2-core"       % "2.4.4" % "optional",
-  "org.specs2"     %% "specs2-scalacheck" % "2.4.4" % "optional"
+  "org.scalacheck" %% "scalacheck"        % "1.12.2",
+  "org.scalatest"  %% "scalatest"         % "2.2.5" % "optional",
+  "org.specs2"     %% "specs2-core"       % "3.6" % "optional",
+  "org.specs2"     %% "specs2-scalacheck" % "3.6" % "optional"
 )
 
-conflictWarning ~= { cw =>
-  cw.copy(level = Level.Error, failOnConflict = true)
-}
+resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+
+scalacOptions in Test ++= Seq("-Yrangepos")
 
 // Release plugin
 
