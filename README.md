@@ -15,20 +15,20 @@ To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies +=
-  "org.typelevel" %% "discipline" % "0.2.1"
+  "org.typelevel" %% "discipline" % "0.3"
 ```
 
 
 Binding to test frameworks
 --------------------------
 
-Discipline is built against Scalacheck 1.11.x.
+Discipline is built against Scalacheck 1.12.x.
 
 There are bindings for Specs2 and ScalaTest. Since Discipline depends on them optionally, you have to add either one to your build explicitly:
 
 ```scala
 libraryDependencies +=
-  "org.scalatest" %% "scalatest" % "2.1.3"
+  "org.scalatest" %% "scalatest" % "2.2.5"
   // or
-  "org.specs2" %% "specs2" % "2.3.11"
+  "org.specs2" %% "specs2" % "3.6"
 ```
