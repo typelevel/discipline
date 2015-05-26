@@ -11,12 +11,11 @@ import org.specs2.specification.core.Fragments
 trait Discipline extends ScalaCheck { self: SpecificationLike =>
 
   def checkAll(name: String, ruleSet: Laws#RuleSet)(implicit p: Parameters) = {
-    val fragments =
-      Fragments.foreach(ruleSet.all.properties) { case (id, prop) =>
-         s2""" ${id ! check(prop, p, defaultFreqMapPretty) }""" ^ br
-      }
-
-    addFragments(s"""\n\n${ruleSet.name} laws must hold for ${name}\n\n""" ^ fragments)
+  	s"""${ruleSet.name} laws must hold for ${name}""".txt
+  	br
+    Fragments.foreach(ruleSet.all.properties) { case (id, prop) =>
+      id in check(prop, p, defaultFreqMapPretty)
+    }
   }
 
 }
