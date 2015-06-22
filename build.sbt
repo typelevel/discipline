@@ -23,7 +23,7 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck"        % "1.12.2",
+  "org.scalacheck" %% "scalacheck"        % "1.12.4",
   "org.scalatest"  %% "scalatest"         % "2.2.5" % "optional",
   "org.specs2"     %% "specs2-core"       % "3.6" % "optional",
   "org.specs2"     %% "specs2-scalacheck" % "3.6" % "optional"
