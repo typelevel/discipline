@@ -80,15 +80,7 @@ trait Laws {
       SortedMap(props: _*) ++ parents.flatMap(_.collectParentProps)
 
     /** Assembles all properties. For the rules, see [[RuleSet]]. */
-    final def all: Properties = new Properties(name) {
-      for {
-        (baseName, baseProps) ← bases.sortBy(_._1)
-        (name, prop) ← baseProps.all.properties
-      } property(baseName + ":" + name) = prop
-
-      for ((name, prop) ← collectParentProps)
-        property(name) = prop
-    }
+   final def all: Properties = new AllProperties(name , bases ,collectParentProps)
   }
 
   /**
@@ -125,6 +117,16 @@ trait Laws {
     name = "<empty>"
   )
 
+}
+
+class AllProperties(name: String, bases: Seq[(String, Laws#RuleSet)], collectParentProps: => SortedMap[String, Prop]) extends Properties(name) {
+  for {
+    (baseName, baseProps) ← bases.sortBy(_._1)
+    (name, prop) ← baseProps.all.properties
+  } property(baseName + ":" + name) = prop
+
+  for ((name, prop) ← collectParentProps)
+    property(name) = prop
 }
 
 // vim: expandtab:ts=2:sw=2
