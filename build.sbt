@@ -87,7 +87,7 @@ credentials += {
 pomIncludeRepository := Function.const(false)
 
 pomExtra := (
-  <url>http://typelevel.org/scalaz</url>
+  <url>https://github.com/typelevel/discipline</url>
   <licenses>
     <license>
       <name>MIT</name>
