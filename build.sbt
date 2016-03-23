@@ -22,8 +22,8 @@ lazy val commonSettings = releaseSettings ++ Seq(
     "-language:implicitConversions"
   ),
   libraryDependencies ++= Seq(
-    "org.scalacheck" %%% "scalacheck" % "1.12.4",
-    "org.scalatest"  %%% "scalatest"  % "3.0.0-M7" % "optional"
+    "org.scalacheck" %%% "scalacheck" % "1.13.0",
+    "org.scalatest"  %%% "scalatest"  % "3.0.0-M16-SNAP3" % "optional"
   ),
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
@@ -93,8 +93,8 @@ lazy val discipline = crossProject.in(file("."))
   .settings(commonSettings: _*)
   .jvmSettings(
     libraryDependencies ++= Seq(  
-      "org.specs2" %% "specs2-core"       % "3.6" % "optional",
-      "org.specs2" %% "specs2-scalacheck" % "3.6" % "optional"
+      "org.specs2" %% "specs2-core"       % "3.7.2" % "optional",
+      "org.specs2" %% "specs2-scalacheck" % "3.7.2" % "optional"
     )
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
