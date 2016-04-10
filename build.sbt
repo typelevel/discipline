@@ -10,12 +10,12 @@ import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "discipline root project"
 
-crossScalaVersions := Seq("2.10.5", "2.11.7")
+crossScalaVersions := Seq("2.10.6", "2.11.8")
 
 lazy val commonSettings = releaseSettings ++ Seq(
   organization := "org.typelevel",
   name := "discipline",
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.8",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
