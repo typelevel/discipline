@@ -10,7 +10,7 @@ import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "discipline root project"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-M4")
 
 lazy val commonSettings = releaseSettings ++ Seq(
   organization := "org.typelevel",
@@ -22,8 +22,8 @@ lazy val commonSettings = releaseSettings ++ Seq(
     "-language:implicitConversions"
   ),
   libraryDependencies ++= Seq(
-    "org.scalacheck" %%% "scalacheck" % "1.13.0",
-    "org.scalatest"  %%% "scalatest"  % "3.0.0-M16-SNAP3" % "optional"
+    "org.scalacheck" %%% "scalacheck" % "1.13.1",
+    "org.scalatest"  %%% "scalatest"  % "3.0.0-M16-SNAP4" % "optional"
   ),
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
@@ -84,6 +84,8 @@ lazy val commonSettings = releaseSettings ++ Seq(
   )
 )
 
+val specs2Version = SettingKey[String]("specs2Version")
+
 lazy val root = project.in(file("."))
   .settings(commonSettings: _*)
   .settings(noPublishSettings: _*)
@@ -92,9 +94,17 @@ lazy val root = project.in(file("."))
 lazy val discipline = crossProject.in(file("."))
   .settings(commonSettings: _*)
   .jvmSettings(
+    specs2Version := {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, scalaMajor)) if scalaMajor <= 11 =>
+          "3.7.3"
+        case _ =>
+          "3.7.3.1"
+      }
+    },
     libraryDependencies ++= Seq(  
-      "org.specs2" %% "specs2-core"       % "3.7.2" % "optional",
-      "org.specs2" %% "specs2-scalacheck" % "3.7.2" % "optional"
+      "org.specs2" %% "specs2-core"       % specs2Version.value % "optional",
+      "org.specs2" %% "specs2-scalacheck" % specs2Version.value % "optional" exclude("org.scalacheck", "scalacheck_2.12.0-M3")
     )
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
