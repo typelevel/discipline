@@ -4,3 +4,7 @@ scala:
   - 2.11.8
 jdk:
   - oraclejdk7
+matrix:
+  include:
+  - scala: 2.12.0-M4
+    jdk: oraclejdk8
