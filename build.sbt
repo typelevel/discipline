@@ -23,7 +23,7 @@ lazy val commonSettings = releaseSettings ++ Seq(
   ),
   libraryDependencies ++= Seq(
     "org.scalacheck" %%% "scalacheck" % "1.12.4",
-    "org.scalatest"  %%% "scalatest"  % "3.0.0-M7" % "optional"
+    "org.scalatest"  %%% "scalatest"  % "3.0.0-M15" % "optional"
   ),
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
