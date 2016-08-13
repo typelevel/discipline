@@ -9,7 +9,7 @@ Flexible law checking for Scala
 Usage
 -----
 
-This library is currently available for Scala binary versions 2.10 and 2.11.
+This library is currently available for Scala binary versions 2.10, 2.11 and 2.12.0-M5.
 
 To use the latest version, include the following in your `build.sbt`:
 
@@ -22,13 +22,13 @@ libraryDependencies +=
 Binding to test frameworks
 --------------------------
 
-Discipline is built against Scalacheck 1.12.x. There is also a published artifact for scala.js.
+Discipline is built against Scalacheck 1.13.x. There is also a published artifact for scala.js.
 
 There are bindings for Specs2 and ScalaTest. Since Discipline depends on them optionally, you have to add either one to your build explicitly:
 
 ```scala
 libraryDependencies +=
-  "org.scalatest" %% "scalatest" % "3.0.0-M7"
+  "org.scalatest" %% "scalatest" % "3.0.0"
   // or
-  "org.specs2" %% "specs2" % "3.6"
+  "org.specs2" %% "specs2" % "3.8.4"
 ```
