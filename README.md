@@ -9,13 +9,13 @@ Flexible law checking for Scala
 Usage
 -----
 
-This library is currently available for Scala binary versions 2.10, 2.11 and 2.12.0-RC1.
+This library is currently available for Scala binary versions 2.10, 2.11 and 2.12.0-RC2.
 
 To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies +=
-  "org.typelevel" %% "discipline" % "0.7"
+  "org.typelevel" %% "discipline" % "0.7.1"
 ```
 
 
@@ -30,5 +30,5 @@ There are bindings for Specs2 and ScalaTest. Since Discipline depends on them op
 libraryDependencies +=
   "org.scalatest" %% "scalatest" % "3.0.0"
   // or
-  "org.specs2" %% "specs2" % "3.8.5"
+  "org.specs2" %% "specs2" % "3.8.5.1"
 ```
