@@ -10,12 +10,12 @@ import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "discipline root project"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1")
 
 lazy val commonSettings = releaseSettings ++ Seq(
   organization := "org.typelevel",
   name := "discipline",
-  scalaVersion := "2.12.0",
+  scalaVersion := "2.12.1",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -23,7 +23,7 @@ lazy val commonSettings = releaseSettings ++ Seq(
   ),
   libraryDependencies ++= Seq(
     "org.scalacheck" %%% "scalacheck" % "1.13.4",
-    "org.scalatest"  %%% "scalatest"  % "3.0.0" % "optional"
+    "org.scalatest"  %%% "scalatest"  % "3.0.1" % "optional"
   ),
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
