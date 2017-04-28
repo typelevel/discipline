@@ -42,13 +42,13 @@ lazy val commonSettings = releaseSettings ++ Seq(
 
   // Publishing
 
-  publishTo <<= (version).apply { v =>
+  publishTo := (version).apply { v =>
     val nexus = "https://oss.sonatype.org/"
     if (v.trim.endsWith("SNAPSHOT"))
       Some("Snapshots" at nexus + "content/repositories/snapshots")
     else
       Some("Releases" at nexus + "service/local/staging/deploy/maven2")
-  },
+  }.value,
 
   credentials += {
     Seq("build.publish.user", "build.publish.password").map(k => Option(System.getProperty(k))) match {
