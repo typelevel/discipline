@@ -30,5 +30,5 @@ There are bindings for Specs2 and ScalaTest. Since Discipline depends on them op
 libraryDependencies +=
   "org.scalatest" %% "scalatest" % "3.0.1"
   // or
-  "org.specs2" %% "specs2" % "3.8.6"
+  "org.specs2" %% "specs2" % "3.8.9"
 ```
