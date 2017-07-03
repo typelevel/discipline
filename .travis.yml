@@ -10,4 +10,3 @@ matrix:
     jdk: oraclejdk8
   - scala: 2.13.0-M1
     jdk: oraclejdk8
-    script: sbt ++${TRAVIS_SCALA_VERSION} disciplineJVM/test

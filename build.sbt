@@ -10,7 +10,7 @@ import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "discipline root project"
 
-crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2")
+crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2", "2.13.0-M1")
 
 lazy val commonSettings = releaseSettings ++ Seq(
   organization := "org.typelevel",
