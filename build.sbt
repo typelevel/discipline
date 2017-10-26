@@ -1,6 +1,5 @@
 import sbtrelease._
 import sbtrelease.ReleasePlugin._
-import sbtrelease.ReleasePlugin.ReleaseKeys._
 import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
 
@@ -12,7 +11,7 @@ name := "discipline root project"
 
 crossScalaVersions := Seq("2.11.11", "2.12.2")
 
-lazy val commonSettings = releaseSettings ++ Seq(
+lazy val commonSettings = Seq(
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.12.2",
@@ -113,14 +112,14 @@ lazy val publishSignedArtifacts = ReleaseStep(
     // getPublishTo fails if no publish repository is set up.
     val ex = st.extract
     val ref = ex.get(thisProjectRef)
-    Classpaths.getPublishTo(ex.get(publishTo in Global in ref))
+    Classpaths.getPublishTo(ex.runTask((publishTo in Global in ref), st)._2)
     st
   },
   enableCrossBuild = true
 )
 
 lazy val noPublishSettings = Seq(
-  publish := (),
-  publishLocal := (),
+  publish := (()),
+  publishLocal := (()),
   publishArtifact := false
 )
