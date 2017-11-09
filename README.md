@@ -15,7 +15,7 @@ To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies +=
-  "org.typelevel" %% "discipline" % "0.7.3"
+  "org.typelevel" %% "discipline" % "0.8"
 ```
 
 
@@ -28,7 +28,7 @@ There are bindings for Specs2 and ScalaTest. Since Discipline depends on them op
 
 ```scala
 libraryDependencies +=
-  "org.scalatest" %% "scalatest" % "3.0.1"
+  "org.scalatest" %% "scalatest" % "3.0.3"
   // or
-  "org.specs2" %% "specs2" % "3.8.9"
+  "org.specs2" %% "specs2" % "4.0.0"
 ```
