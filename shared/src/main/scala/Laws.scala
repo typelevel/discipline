@@ -46,7 +46,7 @@ trait Laws {
    *
    * To address this problem, we define the parent in the same kind as
    * ''parent'', and other parents as ''bases''. In this example, the parent of
-   * `AdditiveGroup` is `Group`, and its only basis is `Group`. On the other
+   * `AdditiveGroup` is `AdditiveMonoid`, and its only basis is `Group`. On the other
    * hand, the parent of `Group` is `Monoid`, and it does not have any bases.
    *
    * The set of all properties of a certain class is now defined as union of
