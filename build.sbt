@@ -22,8 +22,8 @@ lazy val commonSettings = Seq(
   ),
   specs2Version := "4.0.0",
   libraryDependencies ++= Seq(
-    "org.specs2" %% "specs2-core"       % specs2Version.value % "optional",
-    "org.specs2" %% "specs2-scalacheck" % specs2Version.value % "optional",
+    "org.specs2" %%% "specs2-core"       % specs2Version.value % "optional",
+    "org.specs2" %%% "specs2-scalacheck" % specs2Version.value % "optional",
     "org.scalacheck" %%% "scalacheck" % "1.13.5",
     "org.scalatest"  %%% "scalatest"  % "3.0.3" % "optional"
   ),
