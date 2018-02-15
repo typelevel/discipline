@@ -9,9 +9,8 @@ import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "discipline root project"
 
-crossScalaVersions := Seq("2.11.11", "2.12.2")
-
 lazy val commonSettings = Seq(
+  crossScalaVersions := Seq("2.11.11", "2.12.2", "2.13.0-M3"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.12.2",
@@ -20,12 +19,21 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  specs2Version := "4.0.0",
+  specs2Version := {
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 13)) =>
+        "4.0.2"
+      case _ =>
+        // don't use 4.0.2 when Scala 2.12, 2.11
+        // https://github.com/etorreborre/specs2/issues/636
+        "4.0.0"
+    }
+  },
   libraryDependencies ++= Seq(
     "org.specs2" %%% "specs2-core"       % specs2Version.value % "optional",
     "org.specs2" %%% "specs2-scalacheck" % specs2Version.value % "optional",
     "org.scalacheck" %%% "scalacheck" % "1.13.5",
-    "org.scalatest"  %%% "scalatest"  % "3.0.3" % "optional"
+    "org.scalatest"  %%% "scalatest"  % "3.0.5-M1" % "optional"
   ),
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
