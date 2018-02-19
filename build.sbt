@@ -19,16 +19,7 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  specs2Version := {
-    CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 13)) =>
-        "4.0.2"
-      case _ =>
-        // don't use 4.0.2 when Scala 2.12, 2.11
-        // https://github.com/etorreborre/specs2/issues/636
-        "4.0.0"
-    }
-  },
+  specs2Version := "4.0.3",
   libraryDependencies ++= Seq(
     "org.specs2" %%% "specs2-core"       % specs2Version.value % "optional",
     "org.specs2" %%% "specs2-scalacheck" % specs2Version.value % "optional",
