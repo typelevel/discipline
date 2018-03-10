@@ -10,7 +10,7 @@ import com.typesafe.sbt.pgp.PgpKeys._
 name := "discipline root project"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq("2.11.12", "2.12.4", "2.13.0-M3"),
+  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.4", "2.13.0-M3"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.12.4",
@@ -19,13 +19,17 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  specs2Version := "4.0.3",
   libraryDependencies ++= Seq(
-    "org.specs2" %%% "specs2-core"       % specs2Version.value % "optional",
-    "org.specs2" %%% "specs2-scalacheck" % specs2Version.value % "optional",
-    "org.scalacheck" %%% "scalacheck" % "1.13.5",
-    "org.scalatest"  %%% "scalatest"  % "3.0.5-M1" % "optional"
+    "org.scalacheck" %%% "scalacheck" % "1.13.5"
   ),
+  libraryDependencies += {
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 13)) =>
+        "org.scalatest" %%% "scalatest" % "3.0.5-M1"
+      case _ =>
+        "org.scalatest" %%% "scalatest" % "3.0.5"
+    }
+  },
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   scalacOptions in Test ++= Seq("-Yrangepos"),
 
@@ -94,7 +98,43 @@ lazy val root = project.in(file("."))
 
 lazy val discipline = crossProject.in(file("."))
   .settings(commonSettings: _*)
-  .jsSettings(scalaJSStage in Test := FastOptStage)
+  .jvmSettings(
+     specs2Version := {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, n)) if n == 10 =>
+          "3.9.1"
+        case _ =>
+          "4.0.3"
+      }
+    },
+    libraryDependencies ++= Seq(
+      "org.specs2" %% "specs2-core"       % specs2Version.value % "optional",
+      "org.specs2" %% "specs2-scalacheck" % specs2Version.value % "optional"
+    )
+  )
+  .jsSettings(
+    scalaJSStage in Test := FastOptStage,
+    specs2Version := "4.0.3",
+    libraryDependencies ++= {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, n)) if n == 10 =>
+          Seq()
+        case _ =>
+          Seq(
+            "org.specs2" %%% "specs2-core"       % specs2Version.value % "optional",
+            "org.specs2" %%% "specs2-scalacheck" % specs2Version.value % "optional"
+          )
+      }
+    },
+    excludeFilter in unmanagedSources := {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, n)) if n == 10 =>
+          HiddenFileFilter || "*specs2*" || "*LawSpec.scala"
+        case _ =>
+          ""
+      }
+    }
+  )
 
 lazy val disciplineJVM = discipline.jvm
 lazy val disciplineJS = discipline.js
