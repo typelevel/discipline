@@ -25,9 +25,9 @@ lazy val commonSettings = Seq(
   libraryDependencies += {
     CrossVersion.partialVersion(scalaVersion.value) match {
       case Some((2, 13)) =>
-        "org.scalatest" %%% "scalatest" % "3.0.5-M1"
+        "org.scalatest" %%% "scalatest" % "3.0.5-M1" % "optional"
       case _ =>
-        "org.scalatest" %%% "scalatest" % "3.0.5"
+        "org.scalatest" %%% "scalatest" % "3.0.5" % "optional"
     }
   },
   resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
