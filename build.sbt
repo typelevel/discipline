@@ -15,6 +15,7 @@ lazy val commonSettings = Seq(
   name := "discipline",
   scalaVersion := "2.12.4",
   scalacOptions ++= Seq(
+    "-Xfuture",
     "-deprecation",
     "-feature",
     "-language:implicitConversions"
