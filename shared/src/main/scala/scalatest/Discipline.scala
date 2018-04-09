@@ -8,7 +8,7 @@ import org.scalatest.prop.Checkers
 
 trait Discipline extends Checkers { self: FunSuiteLike =>
 
-  def checkAll(name: String, ruleSet: Laws#RuleSet) {
+  def checkAll(name: String, ruleSet: Laws#RuleSet): Unit = {
     for ((id, prop) ← ruleSet.all.properties)
       test(name + "." + id) {
         check(prop)
