@@ -27,16 +27,17 @@ lazy val commonSettings = Seq(
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
 
+  releaseCrossBuild := true,
   releaseProcess := Seq[ReleaseStep](
     checkSnapshotDependencies,
     inquireVersions,
-    runTest,
     setReleaseVersion,
     commitReleaseVersion,
     tagRelease,
     publishSignedArtifacts,
     setNextVersion,
-    commitNextVersion
+    commitNextVersion,
+    releaseStepCommand("sonatypeRelease")
   ),
 
   // Publishing
