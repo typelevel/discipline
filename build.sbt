@@ -2,7 +2,7 @@ import sbtrelease._
 import sbtrelease.ReleasePlugin._
 import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
-
+import sbtcrossproject.crossProject
 import com.typesafe.sbt.pgp.PgpKeys._
 
 // Build configuration
@@ -89,7 +89,7 @@ lazy val root = project.in(file("."))
   .settings(noPublishSettings: _*)
   .aggregate(disciplineJS, disciplineJVM)
 
-lazy val discipline = crossProject.in(file("."))
+lazy val discipline = crossProject(JSPlatform, JVMPlatform).in(file("."))
   .settings(commonSettings: _*)
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
