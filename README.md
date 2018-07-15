@@ -20,6 +20,7 @@ libraryDependencies +=
   "org.typelevel" %% "discipline" % "0.10.0"
 ```
 
+For a little more info see the ["Law Enforcement using Discipline"](https://typelevel.org/blog/2013/11/17/discipline.html) blog post.
 
 Binding to test frameworks
 --------------------------
