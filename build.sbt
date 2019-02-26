@@ -22,7 +22,7 @@ lazy val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     "org.scalacheck" %%% "scalacheck" % "1.14.0",
-    "org.scalatest" %%% "scalatest" % "3.0.6-SNAP6" % "optional",
+    "org.scalatest" %%% "scalatest" % "3.1.0-SNAP7" % "optional",
     "org.specs2" %%% "specs2-scalacheck" % "4.4.1" % "optional"
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
