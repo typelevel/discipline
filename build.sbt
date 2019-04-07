@@ -34,7 +34,7 @@ lazy val commonSettings = Seq(
     setReleaseVersion,
     commitReleaseVersion,
     tagRelease,
-    publishSignedArtifacts,
+    publishArtifacts,
     setNextVersion,
     commitNextVersion,
     releaseStepCommand("sonatypeRelease")
@@ -97,22 +97,6 @@ lazy val disciplineJVM = discipline.jvm
 lazy val disciplineJS = discipline.js
 
 // Release plugin
-
-lazy val publishSignedArtifacts = ReleaseStep(
-  action = st => {
-    val extracted = st.extract
-    val ref = extracted.get(thisProjectRef)
-    extracted.runAggregated(publishSigned in Global in ref, st)
-  },
-  check = st => {
-    // getPublishTo fails if no publish repository is set up.
-    val ex = st.extract
-    val ref = ex.get(thisProjectRef)
-    Classpaths.getPublishTo(ex.runTask((publishTo in Global in ref), st)._2)
-    st
-  },
-  enableCrossBuild = true
-)
 
 lazy val noPublishSettings = Seq(
   publish := (()),
