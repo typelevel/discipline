@@ -10,7 +10,7 @@ import com.typesafe.sbt.pgp.PgpKeys._
 name := "discipline root project"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0-M5"),
+  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0-RC1"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.12.8",
@@ -22,7 +22,7 @@ lazy val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     "org.scalacheck" %%% "scalacheck" % "1.14.0",
-    "org.scalatest" %%% "scalatest" % "3.0.7" % "optional",
+    "org.scalatest" %%% "scalatest" % "3.0.8-RC2" % "optional",
     "org.specs2" %%% "specs2-scalacheck" % "4.5.1" % "optional"
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
