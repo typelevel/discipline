@@ -3,10 +3,10 @@ package scalatest
 
 import org.scalacheck.Properties
 
-import org.scalatest.FunSuiteLike
-import org.scalatest.prop.Checkers
+import org.scalatest.funsuite.AnyFunSuiteLike
+import org.scalatest.check.Checkers
 
-trait Discipline extends Checkers { self: FunSuiteLike =>
+trait Discipline extends Checkers { self: AnyFunSuiteLike =>
 
   def checkAll(name: String, ruleSet: Laws#RuleSet): Unit = {
     for ((id, prop) ← ruleSet.all.properties)
