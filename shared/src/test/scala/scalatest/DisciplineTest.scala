@@ -1,9 +1,9 @@
 package org.typelevel.discipline
 package scalatest
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuiteLike
 
-class LawTests extends FunSuite with Discipline {
+class LawTests extends AnyFunSuiteLike with Discipline {
   checkAll("Int", RingLaws.ring)
 }
 
