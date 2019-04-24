@@ -3,7 +3,6 @@ import sbtrelease.ReleasePlugin._
 import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
 import sbtcrossproject.crossProject
-import com.typesafe.sbt.pgp.PgpKeys._
 
 // Build configuration
 
