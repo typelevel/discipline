@@ -35,3 +35,8 @@ libraryDependencies +=
   // or
   "org.specs2" %% "specs2-scalacheck" % "4.3.0"
 ```
+
+Code of Conduct
+---------------
+
+See the [Code of Conduct](CODE_OF_CONDUCT.md)
