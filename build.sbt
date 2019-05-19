@@ -8,6 +8,10 @@ import sbtcrossproject.crossProject
 
 name := "discipline root project"
 
+val scalaTestVersion = "3.1.0-SNAP10"
+val scalaTestPlusVersion = "1.0.0-SNAP4"
+val specs2Version = "4.5.1"
+
 lazy val commonSettings = Seq(
   crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0-RC1"),
   organization := "org.typelevel",
@@ -20,10 +24,7 @@ lazy val commonSettings = Seq(
     "-language:implicitConversions"
   ),
   libraryDependencies ++= Seq(
-    "org.scalacheck" %%% "scalacheck" % "1.14.0",
-    "org.scalatest" %%% "scalatest" % "3.1.0-SNAP10" % "optional",
-    "org.scalatestplus" %%% "scalatestplus-scalacheck" % "1.0.0-SNAP4" % "optional",
-    "org.specs2" %%% "specs2-scalacheck" % "4.5.1" % "optional"
+    "org.scalacheck" %%% "scalacheck" % "1.14.0"
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
 
@@ -87,14 +88,51 @@ lazy val commonSettings = Seq(
 lazy val root = project.in(file("."))
   .settings(commonSettings: _*)
   .settings(noPublishSettings: _*)
-  .aggregate(disciplineJS, disciplineJVM)
+  .aggregate(
+    disciplineJS,
+    disciplineJVM,
+    scalaTestDisciplineJS,
+    scalaTestDisciplineJVM,
+    specs2DisciplineJS,
+    specs2DisciplineJVM
+  )
 
-lazy val discipline = crossProject(JSPlatform, JVMPlatform).in(file("."))
+lazy val discipline = crossProject(JSPlatform, JVMPlatform)
+  .in(file("core"))
   .settings(commonSettings: _*)
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
 lazy val disciplineJVM = discipline.jvm
 lazy val disciplineJS = discipline.js
+
+lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
+  .in(file("scalatest"))
+  .settings(commonSettings: _*)
+  .settings(
+    moduleName := "discipline-scalatest",
+    libraryDependencies ++= Seq(
+      "org.scalatest" %%% "scalatest" % "3.1.0-SNAP10",
+      "org.scalatestplus" %%% "scalatestplus-scalacheck" % "1.0.0-SNAP4"
+    )
+  )
+  .jsSettings(scalaJSStage in Test := FastOptStage)
+  .dependsOn(discipline)
+
+lazy val scalaTestDisciplineJVM = scalaTestDiscipline.jvm
+lazy val scalaTestDisciplineJS = scalaTestDiscipline.js
+
+lazy val specs2Discipline = crossProject(JSPlatform, JVMPlatform)
+  .in(file("specs2"))
+  .settings(commonSettings: _*)
+  .settings(
+    moduleName := "discipline-specs2",
+    libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version
+  )
+  .jsSettings(scalaJSStage in Test := FastOptStage)
+  .dependsOn(discipline)
+
+lazy val specs2DisciplineJVM = specs2Discipline.jvm
+lazy val specs2DisciplineJS = specs2Discipline.js
 
 // Release plugin
 
