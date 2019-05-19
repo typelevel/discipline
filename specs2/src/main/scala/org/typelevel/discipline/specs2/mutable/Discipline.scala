@@ -1,8 +1,6 @@
 package org.typelevel.discipline
 package specs2.mutable
 
-import org.scalacheck.Properties
-
 import org.specs2.mutable.SpecificationLike
 import org.specs2.ScalaCheck
 import org.specs2.scalacheck.Parameters
