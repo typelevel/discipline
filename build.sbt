@@ -2,7 +2,7 @@ import sbtrelease._
 import sbtrelease.ReleasePlugin._
 import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
-import sbtcrossproject.crossProject
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 // Build configuration
 
@@ -98,14 +98,17 @@ lazy val root = project.in(file("."))
   )
 
 lazy val discipline = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
   .in(file("core"))
   .settings(commonSettings: _*)
+  .settings(libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version % Test)
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
 lazy val disciplineJVM = discipline.jvm
 lazy val disciplineJS = discipline.js
 
 lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
   .in(file("scalatest"))
   .settings(commonSettings: _*)
   .settings(
@@ -116,12 +119,13 @@ lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
     )
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
-  .dependsOn(discipline)
+  .dependsOn(discipline, discipline % "test->test")
 
 lazy val scalaTestDisciplineJVM = scalaTestDiscipline.jvm
 lazy val scalaTestDisciplineJS = scalaTestDiscipline.js
 
 lazy val specs2Discipline = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
   .in(file("specs2"))
   .settings(commonSettings: _*)
   .settings(
@@ -129,7 +133,7 @@ lazy val specs2Discipline = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
-  .dependsOn(discipline)
+  .dependsOn(discipline, discipline % "test->test")
 
 lazy val specs2DisciplineJVM = specs2Discipline.jvm
 lazy val specs2DisciplineJS = specs2Discipline.js
