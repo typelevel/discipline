@@ -1,7 +1,6 @@
 package org.typelevel.discipline
 
 import org.scalacheck.Prop
-import org.scalacheck.Gen.Parameters
 
 object Dummy {
   def prop = Prop(_ => Prop.Result(status = Prop.True))
@@ -14,19 +13,19 @@ trait GroupLaws extends Laws {
   def semigroup = new GroupProperties(
     name = "semigroup",
     parent = None,
-    "associative" → Dummy.prop
+    "associative" -> Dummy.prop
   )
 
   def monoid = new GroupProperties(
     name = "monoid",
     parent = Some(semigroup),
-    "identity" → Dummy.prop
+    "identity" -> Dummy.prop
   )
 
   def group = new GroupProperties(
     name = "group",
     parent = Some(monoid),
-    "inverse" → Dummy.prop
+    "inverse" -> Dummy.prop
   )
 
   def additiveSemigroup = new AdditiveProperties(
@@ -56,7 +55,7 @@ trait GroupLaws extends Laws {
     val props: (String, Prop)*
   ) extends RuleSet with HasOneParent {
     val name = base.name
-    val bases = Seq("base" → base)
+    val bases = Seq("base" -> base)
   }
 
 }
@@ -76,7 +75,7 @@ object RingLaws extends GroupLaws {
   def multiplicativeGroup = new MultiplicativeProperties(
     base = _.group,
     parent = Some(multiplicativeMonoid),
-    "reciprocal consistent" → Dummy.prop
+    "reciprocal consistent" -> Dummy.prop
   )
 
   def semiring = new RingProperties(
@@ -84,7 +83,7 @@ object RingLaws extends GroupLaws {
     al = additiveSemigroup,
     ml = multiplicativeSemigroup,
     parents = Seq.empty,
-    "distributive" → Dummy.prop
+    "distributive" -> Dummy.prop
   )
 
   def rng = new RingProperties(
@@ -116,7 +115,7 @@ object RingLaws extends GroupLaws {
     private val _base = base(RingLaws.this)
 
     val name = _base.name
-    val bases = Seq("base" → _base)
+    val bases = Seq("base" -> _base)
   }
 
   class RingProperties(
@@ -126,7 +125,7 @@ object RingLaws extends GroupLaws {
     val parents: Seq[RingProperties],
     val props: (String, Prop)*
   ) extends RuleSet {
-    def bases = Seq("additive" → al, "multiplicative" → ml)
+    def bases = Seq("additive" -> al, "multiplicative" -> ml)
   }
 
 }

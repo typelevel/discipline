@@ -1,8 +1,6 @@
 package org.typelevel.discipline
 package specs2
 
-import org.scalacheck.Properties
-
 import org.specs2.ScalaCheck
 import org.specs2.SpecificationLike
 import org.specs2.specification.core.Fragments

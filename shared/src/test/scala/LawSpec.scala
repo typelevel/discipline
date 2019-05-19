@@ -2,8 +2,6 @@ package org.typelevel.discipline
 
 import org.specs2.Specification
 
-import org.scalacheck.Properties
-
 class DisciplineSpec extends Specification { def is = s2"""
   A RuleSet should compute the properties correctly
     for rings                   ${ring}
