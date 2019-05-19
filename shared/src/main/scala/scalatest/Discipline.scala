@@ -9,7 +9,7 @@ import org.scalatest.check.Checkers
 trait Discipline extends Checkers { self: AnyFunSuiteLike =>
 
   def checkAll(name: String, ruleSet: Laws#RuleSet): Unit = {
-    for ((id, prop) ← ruleSet.all.properties)
+    for ((id, prop) <- ruleSet.all.properties)
       test(name + "." + id) {
         check(prop)
       }

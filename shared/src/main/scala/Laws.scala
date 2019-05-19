@@ -121,11 +121,11 @@ trait Laws {
 
 class AllProperties(name: String, bases: Seq[(String, Laws#RuleSet)], collectParentProps: => SortedMap[String, Prop]) extends Properties(name) {
   for {
-    (baseName, baseProps) ← bases.sortBy(_._1)
-    (name, prop) ← baseProps.all.properties
+    (baseName, baseProps) <- bases.sortBy(_._1)
+    (name, prop) <- baseProps.all.properties
   } property(baseName + ":" + name) = prop
 
-  for ((name, prop) ← collectParentProps)
+  for ((name, prop) <- collectParentProps)
     property(name) = prop
 }
 
