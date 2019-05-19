@@ -1,8 +1,6 @@
 package org.typelevel.discipline
 package scalatest
 
-import org.scalacheck.Properties
-
 import org.scalatest.funsuite.AnyFunSuiteLike
 import org.scalatest.check.Checkers
 

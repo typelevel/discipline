@@ -1,7 +1,6 @@
 package org.typelevel.discipline
 
 import org.scalacheck.Prop
-import org.scalacheck.Gen.Parameters
 
 object Dummy {
   def prop = Prop(_ => Prop.Result(status = Prop.True))
