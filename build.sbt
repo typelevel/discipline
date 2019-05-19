@@ -14,10 +14,15 @@ lazy val commonSettings = Seq(
   name := "discipline",
   scalaVersion := "2.12.8",
   scalacOptions ++= Seq(
-    "-Xfuture",
     "-deprecation",
     "-feature",
     "-language:implicitConversions"
+  ),
+  scalacOptions ++= (
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, minor)) if minor < 13 => Seq("-Xfuture", "-Ywarn-unused-import")
+      case _                              => Seq("-Ywarn-unused:imports")
+    }
   ),
   libraryDependencies ++= Seq(
     "org.scalacheck" %%% "scalacheck" % "1.14.0",
