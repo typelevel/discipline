@@ -2,7 +2,7 @@ package org.typelevel.discipline
 package scalatest
 
 import org.scalatest.funsuite.AnyFunSuiteLike
-import org.scalatest.check.Checkers
+import org.scalatestplus.scalacheck.Checkers
 
 trait Discipline extends Checkers { self: AnyFunSuiteLike =>
 
