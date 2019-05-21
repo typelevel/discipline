@@ -9,7 +9,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 name := "discipline root project"
 
 val scalaTestVersion = "3.1.0-SNAP10"
-val scalaTestPlusVersion = "1.0.0-SNAP4"
+val scalaTestPlusVersion = "1.0.0-SNAP5"
 val specs2Version = "4.5.1"
 
 lazy val commonSettings = Seq(
@@ -119,8 +119,8 @@ lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
   .settings(
     moduleName := "discipline-scalatest",
     libraryDependencies ++= Seq(
-      "org.scalatest" %%% "scalatest" % "3.1.0-SNAP10",
-      "org.scalatestplus" %%% "scalatestplus-scalacheck" % "1.0.0-SNAP4"
+      "org.scalatest" %%% "scalatest" % scalaTestVersion,
+      "org.scalatestplus" %%% "scalatestplus-scalacheck" % scalaTestPlusVersion
     )
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
