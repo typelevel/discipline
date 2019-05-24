@@ -9,7 +9,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 name := "discipline root project"
 
 val scalaTestVersion = "3.1.0-SNAP11"
-val scalaTestPlusVersion = "1.0.0-SNAP5"
+val scalaTestPlusVersion = "1.0.0-SNAP6"
 val specs2Version = "4.5.1"
 
 lazy val commonSettings = Seq(
