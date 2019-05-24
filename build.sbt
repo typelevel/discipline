@@ -106,7 +106,10 @@ lazy val discipline = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
   .settings(commonSettings: _*)
-  .settings(libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version % Test)
+  .settings(
+    moduleName := "discipline-core",
+    libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version % Test
+  )
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
 lazy val disciplineJVM = discipline.jvm
