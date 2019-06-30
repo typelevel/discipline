@@ -10,7 +10,7 @@ name := "discipline root project"
 
 val scalaTestVersion = "3.1.0-SNAP13"
 val scalaTestPlusVersion = "1.0.0-SNAP8"
-val specs2Version = "4.5.1"
+val specs2Version = "4.6.0"
 
 lazy val commonSettings = Seq(
   crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
