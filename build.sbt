@@ -12,8 +12,14 @@ val scalaTestVersion = "3.1.0-SNAP13"
 val scalaTestPlusVersion = "1.0.0-SNAP8"
 val specs2Version = "4.6.0"
 
+
+val scalacheckJvmJs = libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.14.0"
+val scalacheckNative = libraryDependencies += "com.github.lolgab" %%% "scalacheck" % "1.14.1"
+
+val scala211 = "2.11.12"
+
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
+  crossScalaVersions := Seq(scala211, "2.12.8", "2.13.0"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.0",
@@ -27,9 +33,6 @@ lazy val commonSettings = Seq(
       case Some((2, minor)) if minor < 13 => Seq("-Xfuture", "-Ywarn-unused-import")
       case _                              => Seq("-Ywarn-unused:imports")
     }
-  ),
-  libraryDependencies ++= Seq(
-    "org.scalacheck" %%% "scalacheck" % "1.14.0"
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
 
@@ -90,10 +93,16 @@ lazy val commonSettings = Seq(
   )
 )
 
+lazy val commonNativeSettings = Seq(
+  scalaVersion := scala211,
+  crossScalaVersions := Seq(scala211)
+)
+
 lazy val root = project.in(file("."))
   .settings(commonSettings: _*)
   .settings(noPublishSettings: _*)
   .aggregate(
+    disciplineNative,
     disciplineJS,
     disciplineJVM,
     scalaTestDisciplineJS,
@@ -102,18 +111,27 @@ lazy val root = project.in(file("."))
     specs2DisciplineJVM
   )
 
-lazy val discipline = crossProject(JSPlatform, JVMPlatform)
+lazy val discipline = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
-  .settings(commonSettings: _*)
+  .settings(commonSettings)
   .settings(
     moduleName := "discipline-core",
-    libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version % Test
   )
-  .jsSettings(scalaJSStage in Test := FastOptStage)
+  .platformsSettings(JSPlatform, JVMPlatform)(
+    scalacheckJvmJs
+  )
+  .jsSettings(
+    scalaJSStage in Test := FastOptStage,
+  )
+  .nativeSettings(
+    commonNativeSettings,
+    scalacheckNative
+  )
 
 lazy val disciplineJVM = discipline.jvm
 lazy val disciplineJS = discipline.js
+lazy val disciplineNative = discipline.native
 
 lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
@@ -124,7 +142,8 @@ lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies ++= Seq(
       "org.scalatest" %%% "scalatest" % scalaTestVersion,
       "org.scalatestplus" %%% "scalatestplus-scalacheck" % scalaTestPlusVersion
-    )
+    ),
+    scalacheckJvmJs
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
   .dependsOn(discipline, discipline % "test->test")
@@ -149,7 +168,7 @@ lazy val specs2DisciplineJS = specs2Discipline.js
 // Release plugin
 
 lazy val noPublishSettings = Seq(
-  publish := (()),
-  publishLocal := (()),
+  publish := {},
+  publishLocal := {},
   publishArtifact := false
 )
