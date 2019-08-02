@@ -8,8 +8,6 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 name := "discipline root project"
 
-val scalaTestVersion = "3.1.0-SNAP13"
-val scalaTestPlusVersion = "1.0.0-SNAP8"
 val specs2Version = "4.6.0"
 
 lazy val commonSettings = Seq(
@@ -94,15 +92,11 @@ lazy val root = project.in(file("."))
   .settings(commonSettings: _*)
   .settings(noPublishSettings: _*)
   .aggregate(
-    disciplineJS,
-    disciplineJVM,
-    scalaTestDisciplineJS,
-    scalaTestDisciplineJVM,
-    specs2DisciplineJS,
-    specs2DisciplineJVM
+    coreJS,
+    coreJVM,
   )
 
-lazy val discipline = crossProject(JSPlatform, JVMPlatform)
+lazy val core = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
   .settings(commonSettings: _*)
@@ -112,39 +106,8 @@ lazy val discipline = crossProject(JSPlatform, JVMPlatform)
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
-lazy val disciplineJVM = discipline.jvm
-lazy val disciplineJS = discipline.js
-
-lazy val scalaTestDiscipline = crossProject(JSPlatform, JVMPlatform)
-  .crossType(CrossType.Pure)
-  .in(file("scalatest"))
-  .settings(commonSettings: _*)
-  .settings(
-    moduleName := "discipline-scalatest",
-    libraryDependencies ++= Seq(
-      "org.scalatest" %%% "scalatest" % scalaTestVersion,
-      "org.scalatestplus" %%% "scalatestplus-scalacheck" % scalaTestPlusVersion
-    )
-  )
-  .jsSettings(scalaJSStage in Test := FastOptStage)
-  .dependsOn(discipline, discipline % "test->test")
-
-lazy val scalaTestDisciplineJVM = scalaTestDiscipline.jvm
-lazy val scalaTestDisciplineJS = scalaTestDiscipline.js
-
-lazy val specs2Discipline = crossProject(JSPlatform, JVMPlatform)
-  .crossType(CrossType.Pure)
-  .in(file("specs2"))
-  .settings(commonSettings: _*)
-  .settings(
-    moduleName := "discipline-specs2",
-    libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version
-  )
-  .jsSettings(scalaJSStage in Test := FastOptStage)
-  .dependsOn(discipline, discipline % "test->test")
-
-lazy val specs2DisciplineJVM = specs2Discipline.jvm
-lazy val specs2DisciplineJS = specs2Discipline.js
+lazy val coreJVM = core.jvm
+lazy val coreJS = core.js
 
 // Release plugin
 
