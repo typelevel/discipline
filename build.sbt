@@ -89,8 +89,8 @@ lazy val commonSettings = Seq(
 )
 
 lazy val root = project.in(file("."))
-  .settings(commonSettings: _*)
-  .settings(noPublishSettings: _*)
+  .settings(commonSettings)
+  .settings(noPublishSettings)
   .aggregate(
     coreJS,
     coreJVM,
@@ -99,10 +99,9 @@ lazy val root = project.in(file("."))
 lazy val core = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
-  .settings(commonSettings: _*)
+  .settings(commonSettings)
   .settings(
-    moduleName := "discipline-core",
-    libraryDependencies += "org.specs2" %%% "specs2-scalacheck" % specs2Version % Test
+    moduleName := "discipline-core"
   )
   .jsSettings(scalaJSStage in Test := FastOptStage)
 
