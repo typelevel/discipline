@@ -10,8 +10,10 @@ name := "discipline root project"
 
 val specs2Version = "4.6.0"
 
+val scala211 = "2.11.12"
+
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
+  crossScalaVersions := Seq(scala211, "2.12.8", "2.13.0"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.0",
@@ -88,30 +90,42 @@ lazy val commonSettings = Seq(
   )
 )
 
+lazy val commonNativeSettings = Seq(
+  scalaVersion := scala211,
+  crossScalaVersions := Seq(scala211)
+)
+
 lazy val root = project.in(file("."))
   .settings(commonSettings)
   .settings(noPublishSettings)
   .aggregate(
     coreJS,
     coreJVM,
+    coreNative
   )
 
-lazy val core = crossProject(JSPlatform, JVMPlatform)
+lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
   .settings(commonSettings)
   .settings(
     moduleName := "discipline-core"
   )
-  .jsSettings(scalaJSStage in Test := FastOptStage)
+  .jsSettings(
+    scalaJSStage in Test := FastOptStage
+  )
+  .nativeSettings(
+    commonNativeSettings
+  )
 
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
+lazy val coreNative = core.native
 
 // Release plugin
 
 lazy val noPublishSettings = Seq(
-  publish := (()),
-  publishLocal := (()),
+  publish := {},
+  publishLocal := {},
   publishArtifact := false
 )
