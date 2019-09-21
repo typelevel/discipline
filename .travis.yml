@@ -10,18 +10,19 @@ scala:
 jdk:
   - openjdk8
 script:
-  - sbt ++${TRAVIS_SCALA_VERSION}! disciplineJVM/test disciplineJS/test scalaTestDisciplineJVM/test scalaTestDisciplineJS/test specs2DisciplineJVM/test specs2DisciplineJS/test
+  - sbt ++${TRAVIS_SCALA_VERSION}! coreJVM/test coreJS/test
 
-include:
-  - scala: 2.11.12
-    before_script:
-      - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
-    sudo: required
-    script: sbt ++$TRAVIS_SCALA_VERSION! disciplineNative/test
+matrix:
+  include:
+    - scala: 2.11.12
+      before_script:
+        - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
+      sudo: required
+      script: sbt ++$TRAVIS_SCALA_VERSION! coreNative/test
 
-  - scala: 2.11.12
-    env: SCALANATIVE_VERSION="0.4.0-M2"
-    before_script:
-      - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
-    sudo: required
-    script: sbt ++$TRAVIS_SCALA_VERSION! disciplineNative/test
+    - scala: 2.11.12
+      env: SCALANATIVE_VERSION="0.4.0-M2"
+      before_script:
+        - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
+      sudo: required
+      script: sbt ++$TRAVIS_SCALA_VERSION! coreNative/test
