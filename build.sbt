@@ -41,6 +41,7 @@ lazy val commonSettings = Seq(
     commitReleaseVersion,
     tagRelease,
     publishArtifacts,
+    releaseStepCommandAndRemaining(s"; ++ ${scala211} ; disciplineNative/publish"),
     setNextVersion,
     commitNextVersion,
     releaseStepCommand("sonatypeRelease")
@@ -100,8 +101,7 @@ lazy val root = project.in(file("."))
   .settings(noPublishSettings)
   .aggregate(
     coreJS,
-    coreJVM,
-    coreNative
+    coreJVM
   )
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
