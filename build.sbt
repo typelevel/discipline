@@ -41,7 +41,7 @@ lazy val commonSettings = Seq(
     commitReleaseVersion,
     tagRelease,
     publishArtifacts,
-    releaseStepCommandAndRemaining(s"; ++ ${scala211} ; disciplineNative/publish"),
+    releaseStepCommandAndRemaining(s"; ++ ${scala211} ; coreNative/publish"),
     setNextVersion,
     commitNextVersion,
     releaseStepCommand("sonatypeRelease")
