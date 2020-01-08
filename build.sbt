@@ -8,15 +8,13 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 name := "discipline root project"
 
-val specs2Version = "4.6.0"
-
 val scala211 = "2.11.12"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq(scala211, "2.12.8", "2.13.0"),
+  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1"),
   organization := "org.typelevel",
   name := "discipline",
-  scalaVersion := "2.13.0",
+  scalaVersion := "2.13.1",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
