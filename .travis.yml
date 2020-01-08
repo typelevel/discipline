@@ -5,8 +5,8 @@ addons:
     update: true
 scala:
   - 2.11.12
-  - 2.12.8
-  - 2.13.0
+  - 2.12.10
+  - 2.13.1
 jdk:
   - openjdk8
 script:
@@ -31,10 +31,10 @@ matrix:
       env: SCALAJS_VERSION="0.6.31"
       script: sbt ++$TRAVIS_SCALA_VERSION! coreJS/test
 
-    - scala: 2.12.8
+    - scala: 2.12.10
       env: SCALAJS_VERSION="0.6.31"
       script: sbt ++$TRAVIS_SCALA_VERSION! coreJS/test
 
-    - scala: 2.13.0
+    - scala: 2.13.1
       env: SCALAJS_VERSION="0.6.31"
       script: sbt ++$TRAVIS_SCALA_VERSION! coreJS/test
