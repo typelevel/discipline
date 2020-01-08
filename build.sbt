@@ -11,7 +11,7 @@ name := "discipline root project"
 val scala211 = "2.11.12"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1"),
+  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.21.0-RC1"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.1",
@@ -27,7 +27,7 @@ lazy val commonSettings = Seq(
     }
   ),
   libraryDependencies ++= Seq(
-    "org.scalacheck" %%% "scalacheck" % "1.14.3"
+    ("org.scalacheck" %%% "scalacheck" % "1.14.3").withDottyCompat(scalaVersion.value)
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
 
@@ -97,6 +97,7 @@ lazy val commonNativeSettings = Seq(
 lazy val root = project.in(file("."))
   .settings(commonSettings)
   .settings(noPublishSettings)
+  .settings(crossScalaVersions := Nil)
   .aggregate(
     coreJS,
     coreJVM
@@ -110,7 +111,8 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     moduleName := "discipline-core"
   )
   .jsSettings(
-    scalaJSStage in Test := FastOptStage
+    scalaJSStage in Test := FastOptStage,
+    crossScalaVersions := crossScalaVersions.value.init
   )
   .nativeSettings(
     commonNativeSettings

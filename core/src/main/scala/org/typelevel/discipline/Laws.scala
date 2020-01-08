@@ -80,7 +80,7 @@ trait Laws {
       SortedMap(props: _*) ++ parents.flatMap(_.collectParentProps)
 
     /** Assembles all properties. For the rules, see [[RuleSet]]. */
-   final def all: Properties = new AllProperties(name , bases ,collectParentProps)
+    final def all: Properties = new AllProperties(name, bases, collectParentProps)
   }
 
   /**
