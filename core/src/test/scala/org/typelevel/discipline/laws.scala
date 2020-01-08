@@ -45,13 +45,13 @@ trait GroupLaws extends Laws {
 
   class GroupProperties(
     name: String,
-    parent: Option[GroupProperties],
+    parent: Option[RuleSet],
     props: (String, Prop)*
   ) extends DefaultRuleSet(name, parent, props: _*)
 
   class AdditiveProperties(
     val base: GroupProperties,
-    val parent: Option[AdditiveProperties],
+    val parent: Option[RuleSet],
     val props: (String, Prop)*
   ) extends RuleSet with HasOneParent {
     val name = base.name
