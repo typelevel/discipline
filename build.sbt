@@ -8,8 +8,6 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 name := "discipline root project"
 
-val specs2Version = "4.8.0"
-
 val scala211 = "2.11.12"
 
 lazy val commonSettings = Seq(
