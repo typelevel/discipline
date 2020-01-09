@@ -30,7 +30,6 @@ lazy val commonSettings = Seq(
     ("org.scalacheck" %%% "scalacheck" % "1.14.3").withDottyCompat(scalaVersion.value)
   ),
   scalacOptions in Test ++= Seq("-Yrangepos"),
-
   releaseCrossBuild := true,
   releaseProcess := Seq[ReleaseStep](
     checkSnapshotDependencies,
@@ -44,17 +43,14 @@ lazy val commonSettings = Seq(
     commitNextVersion,
     releaseStepCommand("sonatypeRelease")
   ),
-
   // Publishing
-
   publishTo := (version).apply { v =>
     val nexus = "https://oss.sonatype.org/"
     if (v.trim.endsWith("SNAPSHOT"))
-      Some("Snapshots" at nexus + "content/repositories/snapshots")
+      Some("Snapshots".at(nexus + "content/repositories/snapshots"))
     else
-      Some("Releases" at nexus + "service/local/staging/deploy/maven2")
+      Some("Releases".at(nexus + "service/local/staging/deploy/maven2"))
   }.value,
-
   credentials += {
     Seq("build.publish.user", "build.publish.password").map(k => Option(System.getProperty(k))) match {
       case Seq(Some(user), Some(pass)) =>
@@ -63,9 +59,7 @@ lazy val commonSettings = Seq(
         Credentials(Path.userHome / ".ivy2" / ".credentials")
     }
   },
-
   pomIncludeRepository := Function.const(false),
-
   pomExtra := (
     <url>https://github.com/typelevel/discipline</url>
     <licenses>
@@ -94,7 +88,8 @@ lazy val commonNativeSettings = Seq(
   crossScalaVersions := Seq(scala211)
 )
 
-lazy val root = project.in(file("."))
+lazy val root = project
+  .in(file("."))
   .settings(commonSettings)
   .settings(noPublishSettings)
   .settings(crossScalaVersions := Nil)

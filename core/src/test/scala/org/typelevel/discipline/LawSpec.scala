@@ -10,13 +10,13 @@ class DisciplineSpec extends Properties("A RuleSet should compute the properties
   property("for additive groups") = Prop {
     expect(RingLaws.additiveGroup, additiveGroupExpected)
   }
-  
+
   property("for multiplicative groups") = Prop {
     expect(RingLaws.multiplicativeGroup, multiplicativeGroupExpected)
   }
 
   def expect(ruleSet: Laws#RuleSet, props: List[String]) =
-    ruleSet.all.properties.map(_._1) sameElements props
+    ruleSet.all.properties.map(_._1).sameElements(props)
 
   val ringExpected = List(
     "ring.additive:group.base:group.associative",

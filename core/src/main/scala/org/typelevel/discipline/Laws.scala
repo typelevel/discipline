@@ -100,7 +100,8 @@ trait Laws {
     val name: String,
     val parent: Option[RuleSet],
     val props: (String, Prop)*
-  ) extends RuleSet with HasOneParent {
+  ) extends RuleSet
+      with HasOneParent {
     val bases = Seq.empty
   }
 
@@ -119,7 +120,8 @@ trait Laws {
 
 }
 
-class AllProperties(name: String, bases: Seq[(String, Laws#RuleSet)], collectParentProps: => SortedMap[String, Prop]) extends Properties(name) {
+class AllProperties(name: String, bases: Seq[(String, Laws#RuleSet)], collectParentProps: => SortedMap[String, Prop])
+    extends Properties(name) {
   for {
     (baseName, baseProps) <- bases.sortBy(_._1)
     (name, prop) <- baseProps.all.properties
