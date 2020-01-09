@@ -53,7 +53,8 @@ trait GroupLaws extends Laws {
     val base: GroupProperties,
     val parent: Option[RuleSet],
     val props: (String, Prop)*
-  ) extends RuleSet with HasOneParent {
+  ) extends RuleSet
+      with HasOneParent {
     val name = base.name
     val bases = Seq("base" -> base)
   }
@@ -111,7 +112,8 @@ object RingLaws extends GroupLaws {
     val base: GroupLaws => GroupLaws#GroupProperties,
     val parent: Option[MultiplicativeProperties],
     val props: (String, Prop)*
-  ) extends RuleSet with HasOneParent {
+  ) extends RuleSet
+      with HasOneParent {
     private val _base = base(RingLaws.this)
 
     val name = _base.name

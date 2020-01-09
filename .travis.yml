@@ -10,7 +10,7 @@ scala:
 jdk:
   - openjdk8
 script:
-  - sbt ++${TRAVIS_SCALA_VERSION}! coreJVM/test coreJS/test
+  - sbt ++${TRAVIS_SCALA_VERSION}! coreJVM/test coreJS/test scalafmtSbtCheck scalafmtCheckAll
 
 matrix:
   include:
