@@ -1,7 +1,7 @@
 val scalaNativeVersion =
   Option(System.getenv("SCALANATIVE_VERSION")).getOrElse("0.3.9")
 
-addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.0")
+addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.1")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
 addSbtPlugin("io.crashbox" % "sbt-gpg" % "0.2.1")
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.0.1")
