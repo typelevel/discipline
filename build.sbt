@@ -45,7 +45,7 @@ lazy val commonSettings = Seq(
     releaseStepCommand("sonatypeRelease")
   ),
   // Publishing
-  publishTo := (version).apply { v =>
+  publishTo := version.apply { v =>
     val nexus = "https://oss.sonatype.org/"
     if (v.trim.endsWith("SNAPSHOT"))
       Some("Snapshots".at(nexus + "content/repositories/snapshots"))

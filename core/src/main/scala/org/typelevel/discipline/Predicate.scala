@@ -7,13 +7,15 @@ trait Predicate[A] extends (A => Boolean) {
 
 object Predicate {
 
-  def apply[A](f: A => Boolean) = new Predicate[A] {
-    def apply(a: A) = f(a)
-  }
+  def apply[A](f: A => Boolean) =
+    new Predicate[A] {
+      def apply(a: A) = f(a)
+    }
 
-  def const[A](res: Boolean) = new Predicate[A] {
-    def apply(a: A) = res
-  }
+  def const[A](res: Boolean) =
+    new Predicate[A] {
+      def apply(a: A) = res
+    }
 
 }
 
