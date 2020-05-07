@@ -114,9 +114,10 @@ trait Laws {
   ) extends DefaultRuleSet(name, None, props: _*)
 
   /** Empty rule set. */
-  def emptyRuleSet: RuleSet = new SimpleRuleSet(
-    name = "<empty>"
-  )
+  def emptyRuleSet: RuleSet =
+    new SimpleRuleSet(
+      name = "<empty>"
+    )
 
 }
 
