@@ -31,6 +31,7 @@ Discipline is built against ScalaCheck 1.14.x. There is also a published artifac
 
 * [discipline-scalatest](https://github.com/typelevel/discipline-scalatest)
 * [discipline-specs2](https://github.com/typelevel/discipline-specs2)
+* [discipline-munit](https://github.com/typelevel/discipline-munit)
 
 Code of Conduct
 ---------------
