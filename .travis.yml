@@ -14,7 +14,7 @@ script:
 
 matrix:
   include:
-    - scala: 0.23.0
+    - scala: 0.25.0
       script: sbt ++$TRAVIS_SCALA_VERSION coreJVM/test
 
     - scala: 2.11.12
