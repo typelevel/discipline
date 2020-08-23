@@ -11,7 +11,7 @@ name := "discipline root project"
 val scala211 = "2.11.12"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.25.0"),
+  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.26.0-RC1"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.1",
