@@ -11,7 +11,7 @@ name := "discipline root project"
 val scala211 = "2.11.12"
 
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.26.0-RC1"),
+  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.1",
@@ -20,16 +20,7 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  scalacOptions ++= (
-    CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, minor)) if minor < 13 => Seq("-Xfuture", "-Ywarn-unused-import")
-      case _                              => Seq("-Ywarn-unused:imports")
-    }
-  ),
-  libraryDependencies ++= Seq(
-    ("org.scalacheck" %%% "scalacheck" % "1.14.3").withDottyCompat(scalaVersion.value)
-  ),
-  scalacOptions in Test ++= Seq("-Yrangepos"),
+  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.0-M1",
   releaseCrossBuild := true,
   releaseVcsSign := true,
   releaseProcess := Seq[ReleaseStep](
