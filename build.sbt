@@ -20,7 +20,7 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.0-M1",
+  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.0-RC1",
   releaseCrossBuild := true,
   releaseVcsSign := true,
   releaseProcess := Seq[ReleaseStep](
