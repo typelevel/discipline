@@ -4,17 +4,27 @@ import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
+// GHA configuration
+
+val scala211 = "2.11.12"
+
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
+ThisBuild / crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1")
+
+ThisBuild / githubWorkflowBuildPreamble := Seq(
+  WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
+)
+
 // Build configuration
 
 name := "discipline root project"
 
-val scala211 = "2.11.12"
-
 lazy val commonSettings = Seq(
-  crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1"),
   organization := "org.typelevel",
   name := "discipline",
   scalaVersion := "2.13.1",
+  crossScalaVersions := (ThisBuild / crossScalaVersions).value,
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -83,11 +93,12 @@ lazy val commonNativeSettings = Seq(
 lazy val root = project
   .in(file("."))
   .settings(commonSettings)
+  .settings(crossScalaVersions := Seq())
   .settings(noPublishSettings)
-  .settings(crossScalaVersions := Nil)
   .aggregate(
     coreJS,
-    coreJVM
+    coreJVM,
+    coreNative
   )
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
