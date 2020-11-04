@@ -15,3 +15,5 @@ project/plugins/project/
 .*.swp
 .*.swo
 .idea*
+
+/.bsp/
