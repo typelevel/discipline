@@ -10,7 +10,7 @@ val scala211 = "2.11.12"
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1")
+ThisBuild / crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1", "3.0.0-M1")
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
@@ -110,7 +110,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .jsSettings(
     scalaJSStage in Test := FastOptStage,
-    crossScalaVersions := crossScalaVersions.value.init
+    crossScalaVersions := crossScalaVersions.value.filter(_.startsWith("2."))
   )
   .nativeSettings(
     commonNativeSettings
