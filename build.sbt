@@ -110,7 +110,6 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .jsSettings(
     scalaJSStage in Test := FastOptStage,
-    crossScalaVersions := crossScalaVersions.value.filter(_.startsWith("2."))
   )
   .nativeSettings(
     commonNativeSettings
