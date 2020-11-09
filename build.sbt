@@ -81,7 +81,14 @@ lazy val commonSettings = Seq(
         <url>https://github.com/larsrh</url>
       </developer>
     </developers>
-  )
+  ),
+  Compile / doc / sources := {
+    val old = (Compile / doc / sources).value
+    if (isDotty.value)
+      Seq()
+    else
+      old
+  }
 )
 
 lazy val commonNativeSettings = Seq(
