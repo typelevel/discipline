@@ -10,7 +10,7 @@ val scala211 = "2.11.12"
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq(scala211, "2.12.10", "2.13.1", "0.27.0-RC1", "3.0.0-M1")
+ThisBuild / crossScalaVersions := Seq(scala211, "2.12.12", "2.13.4", "3.0.0-M1", "3.0.0-M2")
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
@@ -23,7 +23,7 @@ name := "discipline root project"
 lazy val commonSettings = Seq(
   organization := "org.typelevel",
   name := "discipline",
-  scalaVersion := "2.13.1",
+  scalaVersion := "2.13.4",
   crossScalaVersions := (ThisBuild / crossScalaVersions).value,
   scalacOptions ++= Seq(
     "-deprecation",
