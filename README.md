@@ -2,10 +2,9 @@ discipline
 ==========
 
 [![Join the chat at https://gitter.im/typelevel/discipline](https://badges.gitter.im/typelevel/discipline.svg)](https://gitter.im/typelevel/discipline?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![Continuous Integration](https://github.com/typelevel/discipline/workflows/Continuous%20Integration/badge.svg)
 
 Flexible law checking for Scala
-
-[![Build Status](https://travis-ci.org/typelevel/discipline.png?branch=main)](http://travis-ci.org/typelevel/discipline)
 
 
 Usage
