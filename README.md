@@ -5,7 +5,7 @@ discipline
 
 Flexible law checking for Scala
 
-[![Build Status](https://travis-ci.org/typelevel/discipline.png?branch=main)](http://travis-ci.org/typelevel/discipline)
+[![Build Status](https://travis-ci.org/typelevel/discipline.svg?branch=main)](http://travis-ci.org/typelevel/discipline)
 
 
 Usage
