@@ -1,5 +1,5 @@
 val scalaNativeVersion =
-  Option(System.getenv("SCALANATIVE_VERSION")).getOrElse("0.3.9")
+  Option(System.getenv("SCALANATIVE_VERSION")).getOrElse("0.4.0")
 
 addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.1")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
