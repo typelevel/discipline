@@ -6,11 +6,9 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 // GHA configuration
 
-val scala211 = "2.11.12"
-
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq(scala211, "2.12.12", "2.13.4", "3.0.0-M2", "3.0.0-M3")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-M2", "3.0.0-M3")
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
@@ -92,8 +90,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val commonNativeSettings = Seq(
-  scalaVersion := scala211,
-  crossScalaVersions := Seq(scala211)
+  crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
 )
 
 lazy val root = project
