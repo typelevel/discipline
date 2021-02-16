@@ -8,7 +8,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-M2", "3.0.0-M3")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-M3", "3.0.0-RC1")
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
@@ -28,7 +28,7 @@ lazy val commonSettings = Seq(
     "-feature",
     "-language:implicitConversions"
   ),
-  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.2",
+  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.3",
   releaseCrossBuild := true,
   releaseVcsSign := true,
   releaseProcess := Seq[ReleaseStep](
