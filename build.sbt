@@ -18,6 +18,8 @@ ThisBuild / githubWorkflowBuildPreamble := Seq(
 
 name := "discipline root project"
 
+ThisBuild / versionScheme := Some("semver-spec")
+
 lazy val commonSettings = Seq(
   organization := "org.typelevel",
   name := "discipline",
@@ -79,14 +81,7 @@ lazy val commonSettings = Seq(
         <url>https://github.com/larsrh</url>
       </developer>
     </developers>
-  ),
-  Compile / doc / sources := {
-    val old = (Compile / doc / sources).value
-    if (isDotty.value)
-      Seq()
-    else
-      old
-  }
+  )
 )
 
 lazy val commonNativeSettings = Seq(
@@ -112,7 +107,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     moduleName := "discipline-core"
   )
   .jsSettings(
-    scalaJSStage in Test := FastOptStage,
+    Test / scalaJSStage := FastOptStage,
   )
   .nativeSettings(
     commonNativeSettings
