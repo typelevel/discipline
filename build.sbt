@@ -8,7 +8,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-RC2", "3.0.0-RC3")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0")
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
