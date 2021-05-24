@@ -9,9 +9,9 @@ name: Continuous Integration
 
 on:
   pull_request:
-    branches: ['*']
+    branches: ['**']
   push:
-    branches: ['*']
+    branches: ['**']
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
       - run: sudo apt install clang libunwind-dev libgc-dev libre2-dev
 
       - name: Check that workflows are up to date
-        run: sbt ++${{ matrix.scala }} githubWorkflowCheck
+        run: sbt --client '++${{ matrix.scala }}; githubWorkflowCheck'
 
       - name: Build project
-        run: sbt ++${{ matrix.scala }} test
+        run: sbt --client '++${{ matrix.scala }}; test'
