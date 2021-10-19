@@ -11,6 +11,9 @@ ThisBuild / developers := List(
 
 ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.2")
 
+ThisBuild / githubWorkflowJavaVersions := Seq("adoptium@8")
+ThisBuild / githubWorkflowEnv += ("JABBA_INDEX" -> "https://github.com/typelevel/jdk-index/raw/main/index.json")
+
 ThisBuild / githubWorkflowTargetBranches := Seq("main")
 
 ThisBuild / homepage := Some(url("https://github.com/typelevel/discipline"))
