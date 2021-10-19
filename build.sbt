@@ -28,10 +28,6 @@ ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
 ThisBuild / endYear := Some(2021)
 
-ThisBuild / githubWorkflowBuildPreamble := Seq(
-  WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
-)
-
 lazy val discipline = project
   .in(file("."))
   .enablePlugins(NoPublishPlugin)
