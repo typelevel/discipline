@@ -9,9 +9,9 @@ name: Continuous Integration
 
 on:
   pull_request:
-    branches: ['**']
+    branches: [main]
   push:
-    branches: ['**']
+    branches: [main]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,5 +53,4 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt ++${{ matrix.scala }} githubWorkflowCheck
 
-      - name: Build project
-        run: sbt ++${{ matrix.scala }} test
+      - run: sbt ++${{ matrix.scala }} ci

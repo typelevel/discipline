@@ -1,126 +1,51 @@
-import sbtrelease._
-import sbtrelease.ReleasePlugin._
-import sbtrelease.ReleaseStateTransformations._
-import sbtrelease.Utilities._
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-// GHA configuration
+ThisBuild / baseVersion := "1.2"
 
-ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+ThisBuild / organization := "org.typelevel"
+ThisBuild / organizationName := "Typelevel"
+
+ThisBuild / developers := List(
+  Developer("larsrh", "Lars Hupel", "", url("https://github.com/larsrh"))
+)
 
 ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.2")
+
+ThisBuild / githubWorkflowTargetBranches := Seq("main")
+
+ThisBuild / homepage := Some(url("https://github.com/typelevel/discipline"))
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/typelevel/discipline"),
+    "git@github.com:typelevel/discipline.git"
+  )
+)
+
+ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
+ThisBuild / startYear := Some(2013)
+ThisBuild / endYear := Some(2021)
 
 ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Run(List("sudo apt install clang libunwind-dev libgc-dev libre2-dev"))
 )
 
-// Build configuration
-
-name := "discipline root project"
-
-ThisBuild / versionScheme := Some("semver-spec")
-
-lazy val commonSettings = Seq(
-  organization := "org.typelevel",
-  name := "discipline",
-  scalaVersion := "2.13.6",
-  crossScalaVersions := (ThisBuild / crossScalaVersions).value,
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-feature",
-    "-language:implicitConversions"
-  ),
-  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.4",
-  releaseCrossBuild := true,
-  releaseVcsSign := true,
-  releaseProcess := Seq[ReleaseStep](
-    checkSnapshotDependencies,
-    inquireVersions,
-    setReleaseVersion,
-    commitReleaseVersion,
-    tagRelease,
-    releaseStepCommandAndRemaining(s"; + publish"),
-    setNextVersion,
-    commitNextVersion,
-    releaseStepCommand("sonatypeRelease")
-  ),
-  // Publishing
-  publishTo := version.apply { v =>
-    val nexus = "https://oss.sonatype.org/"
-    if (v.trim.endsWith("SNAPSHOT"))
-      Some("Snapshots".at(nexus + "content/repositories/snapshots"))
-    else
-      Some("Releases".at(nexus + "service/local/staging/deploy/maven2"))
-  }.value,
-  credentials += {
-    Seq("build.publish.user", "build.publish.password").map(k => Option(System.getProperty(k))) match {
-      case Seq(Some(user), Some(pass)) =>
-        Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", user, pass)
-      case _ =>
-        Credentials(Path.userHome / ".ivy2" / ".credentials")
-    }
-  },
-  pomIncludeRepository := Function.const(false),
-  pomExtra := (
-    <url>https://github.com/typelevel/discipline</url>
-    <licenses>
-      <license>
-        <name>MIT</name>
-        <url>http://www.opensource.org/licenses/mit-license.php</url>
-        <distribution>repo</distribution>
-      </license>
-    </licenses>
-    <scm>
-      <url>https://github.com/typelevel/discipline</url>
-      <connection>scm:git:git://github.com/typelevel/discipline.git</connection>
-    </scm>
-    <developers>
-      <developer>
-        <id>larsrh</id>
-        <name>Lars Hupel</name>
-        <url>https://github.com/larsrh</url>
-      </developer>
-    </developers>
-  )
-)
-
-lazy val commonNativeSettings = Seq(
-  crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
-)
-
-lazy val root = project
+lazy val discipline = project
   .in(file("."))
-  .settings(commonSettings)
-  .settings(crossScalaVersions := Seq())
-  .settings(noPublishSettings)
+  .enablePlugins(NoPublishPlugin)
   .aggregate(
-    coreJS,
-    coreJVM,
-    coreNative
+    core.jvm,
+    core.js,
+    core.native
   )
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("core"))
-  .settings(commonSettings)
   .settings(
-    moduleName := "discipline-core"
-  )
-  .jsSettings(
-    Test / scalaJSStage := FastOptStage,
+    name := "discipline",
+    moduleName := "discipline-core",
+    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.4"
   )
   .nativeSettings(
-    commonNativeSettings
+    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
   )
-
-lazy val coreJVM = core.jvm
-lazy val coreJS = core.js
-lazy val coreNative = core.native
-
-// Release plugin
-
-lazy val noPublishSettings = Seq(
-  publish := {},
-  publishLocal := {},
-  publishArtifact := false
-)

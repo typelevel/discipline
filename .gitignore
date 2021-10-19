@@ -16,4 +16,7 @@ project/plugins/project/
 .*.swo
 .idea*
 
-/.bsp/
+.bsp/
+.bloop/
+.metals/
+metals.sbt
