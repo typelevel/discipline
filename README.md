@@ -3,6 +3,7 @@ discipline
 
 [![Join the chat at https://gitter.im/typelevel/discipline](https://badges.gitter.im/typelevel/discipline.svg)](https://gitter.im/typelevel/discipline?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Continuous Integration](https://github.com/typelevel/discipline/workflows/Continuous%20Integration/badge.svg)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.typelevel/discipline-core_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/discipline-core_2.13)
 
 Flexible law checking for Scala
 
