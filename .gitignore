@@ -15,6 +15,7 @@ project/plugins/project/
 .*.swp
 .*.swo
 .idea*
+.vscode/
 
 .bsp/
 .bloop/
