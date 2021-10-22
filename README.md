@@ -10,13 +10,13 @@ Flexible law checking for Scala
 Usage
 -----
 
-This library is currently available for Scala binary versions 2.12, 2.13 and 3.0.
+This library is currently available for Scala binary versions 2.12, 2.13 and 3.1.
 
 To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies +=
-  "org.typelevel" %% "discipline-core" % "1.2.0"
+  "org.typelevel" %% "discipline-core" % "1.3.0"
 ```
 
 For a little more info see the ["Law Enforcement using Discipline"](https://typelevel.org/blog/2013/11/17/discipline.html) blog post.
@@ -24,7 +24,7 @@ For a little more info see the ["Law Enforcement using Discipline"](https://type
 Binding to test frameworks
 --------------------------
 
-Discipline is built against ScalaCheck 1.15.x. There is also a published artifact for Scala.js and Scala Native.
+Discipline is built against ScalaCheck 1.15.x. There is also a published artifact for Scala.js and Scala Native 0.4.1.
 
 `discipline-core` is required early each Scala release cycle, so we have chosen to keep this repo minimal.  Starting with v1.0.0, please find the framework bindings in their new locations:
 
