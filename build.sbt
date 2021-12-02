@@ -11,8 +11,7 @@ ThisBuild / developers := List(
 
 ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.7", "3.1.0")
 
-ThisBuild / githubWorkflowJavaVersions := Seq("adoptium@8")
-ThisBuild / githubWorkflowEnv += ("JABBA_INDEX" -> "https://github.com/typelevel/jdk-index/raw/main/index.json")
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("8"))
 
 ThisBuild / githubWorkflowTargetBranches := Seq("main")
 
