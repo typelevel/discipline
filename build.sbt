@@ -1,6 +1,6 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-ThisBuild / baseVersion := "1.3"
+ThisBuild / baseVersion := "1.4"
 
 ThisBuild / organization := "org.typelevel"
 ThisBuild / organizationName := "Typelevel"
@@ -9,7 +9,7 @@ ThisBuild / developers := List(
   Developer("larsrh", "Lars Hupel", "", url("https://github.com/larsrh"))
 )
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.7", "3.1.0")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.7", "3.0.2")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("8"))
 
