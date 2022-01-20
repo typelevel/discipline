@@ -26,6 +26,14 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       _.filterNot(_.revision == "1.3.0") // cursed
     }
   )
+  .jsSettings(
+    tlVersionIntroduced ~= {
+      _ ++ List("2.12", "2.13").map(_ -> "1.0.2").toMap
+    }
+  )
   .nativeSettings(
+    tlVersionIntroduced ~= {
+      _ ++ List("2.12", "2.13").map(_ -> "1.1.3").toMap
+    },
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
   )
