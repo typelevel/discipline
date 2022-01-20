@@ -21,7 +21,10 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "discipline",
     moduleName := "discipline-core",
-    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.4"
+    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.4",
+    mimaPreviousArtifacts ~= {
+      _.filterNot(_.revision == "1.3.0") // cursed
+    }
   )
   .nativeSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
