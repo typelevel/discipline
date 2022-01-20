@@ -4,8 +4,11 @@ ThisBuild / developers := List(
   tlGitHubDev("larsrh", "Lars Hupel")
 )
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", "3.0.2")
+val scala3 = "3.0.2"
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", scala3)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
+ThisBuild / githubWorkflowBuildMatrixExclusions +=
+  MatrixExclude(Map("scala" -> scala3, "project" -> "rootNative"))
 
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
