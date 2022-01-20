@@ -1,40 +1,16 @@
-import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
-
-ThisBuild / baseVersion := "1.4"
-
-ThisBuild / organization := "org.typelevel"
-ThisBuild / organizationName := "Typelevel"
+ThisBuild / tlBaseVersion := "1.4"
 
 ThisBuild / developers := List(
-  Developer("larsrh", "Lars Hupel", "", url("https://github.com/larsrh"))
+  tlGitHubDev("larsrh", "Lars Hupel")
 )
 
 ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", "3.0.2")
-
-ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("8"))
-
-ThisBuild / githubWorkflowTargetBranches := Seq("main")
-
-ThisBuild / homepage := Some(url("https://github.com/typelevel/discipline"))
-ThisBuild / scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/typelevel/discipline"),
-    "git@github.com:typelevel/discipline.git"
-  )
-)
+ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
 
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
-ThisBuild / endYear := Some(2021)
 
-lazy val discipline = project
-  .in(file("."))
-  .enablePlugins(NoPublishPlugin)
-  .aggregate(
-    core.jvm,
-    core.js,
-    core.native
-  )
+lazy val root = tlCrossRootProject.aggregate(core)
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
