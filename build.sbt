@@ -13,7 +13,9 @@ ThisBuild / githubWorkflowBuildMatrixExclusions +=
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
 
-lazy val root = tlCrossRootProject.aggregate(core)
+lazy val discipline = tlCrossRootProject
+    .aggregate(core)
+    .settings(name := "discipline")
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
@@ -24,6 +26,12 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.15.4",
     mimaPreviousArtifacts ~= {
       _.filterNot(_.revision == "1.3.0") // cursed
+    },
+    scalacOptions ++= {
+      val version = System.getProperty("java.version")
+      val releaseFlag = if (version.startsWith("1.8")) Seq() else Seq("-release", "8")
+      val targetFlag = if (tlIsScala3.value || version.startsWith("1.8")) Seq() else Seq("-target:8")
+      releaseFlag ++ targetFlag
     }
   )
   .jsSettings(
