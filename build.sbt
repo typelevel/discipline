@@ -7,8 +7,6 @@ ThisBuild / developers := List(
 val scala3 = "3.1.1"
 ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", scala3)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
-ThisBuild / githubWorkflowBuildMatrixExclusions +=
-  MatrixExclude(Map("scala" -> scala3, "project" -> "rootNative"))
 
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
@@ -21,10 +19,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "discipline",
     moduleName := "discipline-core",
-    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.16.0",
-    mimaPreviousArtifacts ~= {
-      _.filterNot(_.revision == "1.3.0") // cursed
-    }
+    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.16.0"
   )
   .jsSettings(
     tlVersionIntroduced ~= {
@@ -32,8 +27,9 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     }
   )
   .nativeSettings(
-    tlVersionIntroduced ~= {
-      _ ++ List("2.12", "2.13").map(_ -> "1.1.3").toMap
-    },
-    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2."))
+    tlVersionIntroduced := Map(
+      "2.12" -> "1.1.3",
+      "2.13" -> "1.1.3",
+      "3" -> "1.5.0"
+    )
   )
