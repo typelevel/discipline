@@ -11,6 +11,8 @@ ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / startYear := Some(2013)
 
+ThisBuild / tlJdkRelease := Some(8)
+
 lazy val root = tlCrossRootProject.aggregate(core)
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
