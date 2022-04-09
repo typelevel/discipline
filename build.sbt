@@ -4,8 +4,7 @@ ThisBuild / developers := List(
   tlGitHubDev("larsrh", "Lars Hupel")
 )
 
-val scala3 = "3.1.1"
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", scala3)
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", "3.1.1")
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
 
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
@@ -13,7 +12,11 @@ ThisBuild / startYear := Some(2013)
 
 ThisBuild / tlJdkRelease := Some(8)
 
-lazy val root = tlCrossRootProject.aggregate(core)
+lazy val root = tlCrossRootProject
+  .aggregate(core)
+  .settings(
+    name := "discipline"
+  )
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
