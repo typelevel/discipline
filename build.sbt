@@ -12,6 +12,9 @@ ThisBuild / startYear := Some(2013)
 
 ThisBuild / tlJdkRelease := Some(8)
 
+ThisBuild / tlSonatypeUseLegacyHost := false
+ThisBuild / tlCiReleaseTags := false
+
 lazy val root = tlCrossRootProject
   .aggregate(core)
   .settings(
