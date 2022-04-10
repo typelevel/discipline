@@ -25,7 +25,7 @@ For a little more info see the ["Law Enforcement using Discipline"](https://type
 Binding to test frameworks
 --------------------------
 
-Discipline is built against ScalaCheck 1.16.x. There is also a published artifact for Scala.js 1.10 and Scala Native 0.4.4.
+Discipline is built against ScalaCheck 1.16.x. There is also a published artifact for Scala.js 1.8 and Scala Native 0.4.4.
 
 `discipline-core` is required early each Scala release cycle, so we have chosen to keep this repo minimal.  Starting with v1.0.0, please find the framework bindings in their new locations:
 
