@@ -21,7 +21,7 @@
 
 package org.typelevel.discipline
 
-trait Predicate[A] extends (A => Boolean) {
+trait Predicate[A] extends A => Boolean {
   def apply(a: A): Boolean
   def &&(that: Predicate[A]) = Predicate[A](a => this(a) && that(a))
 }
