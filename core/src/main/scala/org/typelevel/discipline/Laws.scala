@@ -83,7 +83,7 @@ trait Laws {
     def props: Seq[(String, Prop)]
 
     private def collectParentProps: SortedMap[String, Prop] =
-      SortedMap(props: _*) ++ parents.flatMap(_.collectParentProps)
+      SortedMap(props*) ++ parents.flatMap(_.collectParentProps)
 
     /**
      * Assembles all properties. For the rules, see [[RuleSet]].
@@ -119,7 +119,7 @@ trait Laws {
   class SimpleRuleSet(
       name: String,
       props: (String, Prop)*
-  ) extends DefaultRuleSet(name, None, props: _*)
+  ) extends DefaultRuleSet(name, None, props*)
 
   /**
    * Empty rule set.

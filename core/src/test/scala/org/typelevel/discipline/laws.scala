@@ -74,7 +74,7 @@ trait GroupLaws extends Laws {
       name: String,
       parent: Option[RuleSet],
       props: (String, Prop)*
-  ) extends DefaultRuleSet(name, parent, props: _*)
+  ) extends DefaultRuleSet(name, parent, props*)
 
   class AdditiveProperties(
       val base: GroupProperties,
