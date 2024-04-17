@@ -27,7 +27,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "discipline",
     moduleName := "discipline-core",
-    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.17.0"
+    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.17.1"
   )
   .jsSettings(
     tlVersionIntroduced ~= {
