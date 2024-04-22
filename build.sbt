@@ -1,4 +1,4 @@
-ThisBuild / tlBaseVersion := "1.6"
+ThisBuild / tlBaseVersion := "1.7"
 
 ThisBuild / developers := List(
   tlGitHubDev("larsrh", "Lars Hupel")
@@ -26,7 +26,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "discipline",
     moduleName := "discipline-core",
-    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.17.1"
+    libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.18.0"
   )
   .jsSettings(
     tlVersionIntroduced ~= {
@@ -34,9 +34,5 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     }
   )
   .nativeSettings(
-    tlVersionIntroduced := Map(
-      "2.12" -> "1.1.3",
-      "2.13" -> "1.1.3",
-      "3" -> "1.5.0"
-    )
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "1.7.0").toMap
   )
