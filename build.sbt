@@ -1,4 +1,4 @@
-ThisBuild / tlBaseVersion := "1.6"
+ThisBuild / tlBaseVersion := "1.7"
 
 ThisBuild / developers := List(
   tlGitHubDev("larsrh", "Lars Hupel")
