@@ -4,7 +4,7 @@ ThisBuild / developers := List(
   tlGitHubDev("larsrh", "Lars Hupel")
 )
 
-ThisBuild / crossScalaVersions := Seq("2.12.20", "2.13.14", "3.3.4")
+ThisBuild / crossScalaVersions := Seq("2.12.20", "2.13.15", "3.3.4")
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.1.5")
 
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
