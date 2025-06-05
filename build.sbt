@@ -12,8 +12,6 @@ ThisBuild / startYear := Some(2013)
 
 ThisBuild / tlJdkRelease := Some(8)
 
-ThisBuild / tlSonatypeUseLegacyHost := false
-
 lazy val discipline = tlCrossRootProject.aggregate(core)
 
 lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
