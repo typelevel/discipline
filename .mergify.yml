@@ -10,15 +10,15 @@ pull_request_rules:
   conditions:
   - author=scala-steward
   - body~=labels:.*early-semver-patch
-  - status-success=Test (ubuntu-22.04, 2.12, temurin@8, disciplineNative)
-  - status-success=Test (ubuntu-22.04, 2.12, temurin@8, disciplineJS)
-  - status-success=Test (ubuntu-22.04, 2.12, temurin@8, disciplineJVM)
-  - status-success=Test (ubuntu-22.04, 2.13, temurin@8, disciplineNative)
-  - status-success=Test (ubuntu-22.04, 2.13, temurin@8, disciplineJS)
-  - status-success=Test (ubuntu-22.04, 2.13, temurin@8, disciplineJVM)
-  - status-success=Test (ubuntu-22.04, 3, temurin@8, disciplineNative)
-  - status-success=Test (ubuntu-22.04, 3, temurin@8, disciplineJS)
-  - status-success=Test (ubuntu-22.04, 3, temurin@8, disciplineJVM)
+  - status-success=Test (ubuntu-22.04, 2.12.21, temurin@8, disciplineNative)
+  - status-success=Test (ubuntu-22.04, 2.12.21, temurin@8, disciplineJS)
+  - status-success=Test (ubuntu-22.04, 2.12.21, temurin@8, disciplineJVM)
+  - status-success=Test (ubuntu-22.04, 3.8.1, temurin@8, disciplineNative)
+  - status-success=Test (ubuntu-22.04, 3.8.1, temurin@8, disciplineJS)
+  - status-success=Test (ubuntu-22.04, 3.8.1, temurin@8, disciplineJVM)
+  - status-success=Test (ubuntu-22.04, 3.3.7, temurin@8, disciplineNative)
+  - status-success=Test (ubuntu-22.04, 3.3.7, temurin@8, disciplineJS)
+  - status-success=Test (ubuntu-22.04, 3.3.7, temurin@8, disciplineJVM)
   actions:
     merge: {}
 - name: Label core PRs
