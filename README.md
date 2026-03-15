@@ -36,4 +36,4 @@ Discipline is built against ScalaCheck 1.16.x. There is also a published artifac
 Code of Conduct
 ---------------
 
-See the [Code of Conduct](CODE_OF_CONDUCT.md)
+See the [Code of Conduct](https://github.com/typelevel/discipline?tab=coc-ov-file#readme)
